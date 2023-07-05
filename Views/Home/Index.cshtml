@@ -1,0 +1,51 @@
+﻿@model IEnumerable<string>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Login TTHH</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <style>
+        .button {
+            width: 100%;
+            height: 40px;
+            background-color: green;
+            border: none;
+            color: white;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <form asp-action="Login" method="post">
+        @Html.AntiForgeryToken()
+        <section class="form-login">
+            <h1>Login</h1>
+            <input class="control" type="text" name="username" placeholder="Usuario"><br>
+            <input class="control" type="password" name="password" placeholder="Contraseña"><br>
+            <div class="form-group">
+                Emisor:
+                <select name="emisor" class="control">
+                    @foreach (var emisor in Model)
+                    {
+                        <option>@emisor</option>
+                    }
+                </select>
+            </div>
+            <button class="button" type="submit">Login</button>
+        </section>
+    </form>
+
+    @if (!string.IsNullOrEmpty(ViewBag.Message))
+    {
+        <div class="alert alert-danger" role="alert">@ViewBag.Message</div>
+    }
+
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger" role="alert">@TempData["ErrorMessage"]</div>
+    }
+</body>
+</html>
+

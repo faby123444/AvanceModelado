@@ -1,0 +1,17 @@
+﻿@{
+    ViewData["Title"] = "Agregar centro de costos";
+}
+
+<h1>Agregar un centro de costos nuevo</h1>
+
+<form method="post" asp-action="PushCentroCostos">
+    <input type="hidden" name="_RequestVerificationToken" value="@ViewData["_RequestVerificationToken"]" />
+
+    <label for="codigo">Ingresar código de centro de costos:</label>
+    <input type="text" id="codigo" name="codigo" placeholder="Código" /><br>
+
+    <label for="descripcion">Ingresar descripción de centro de costos:</label>
+    <input type="text" id="descripcion" name="descripcion" placeholder="Descripción" /><br>
+
+    <button type="submit" class="btn-primary">Agregar</button>
+</form>

@@ -1,0 +1,87 @@
+﻿@model IEnumerable<Avance.Models.CentroCostos>
+
+@{
+    ViewData["Title"] = "Centro de costos";
+    
+}
+
+<h1>Centro de costos</h1>
+
+<p>Buscar centro de costos por nombre de centro de costos:</p>
+<form action="@Url.Action("Search", "CentroCostos")" method="post">
+    @Html.AntiForgeryToken()
+    <input type="text" name="descripcion" placeholder="Nombre de centro de costos">
+    <button type="submit" class="btn btn-primary">Buscar</button>
+</form>
+
+<a href="@Url.Action("AddCentroDeCostos","CentroCostos")" class="btn btn-primary">Agregar</a>
+
+
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Codigo</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Mensaje</th>
+            <th scope="col">Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var centroCosto in Model)
+        {
+            <tr>
+                <th scope="row">@centroCosto.Codigo</th>
+                <td>@centroCosto.NombreCentroCostos</td>
+                <td>@centroCosto.Mensaje</td>
+                <td>
+                    <form action="@Url.Action("ElimAtributo", "CentroCostos", new { id = centroCosto.Codigo})" method="post">
+                        @Html.AntiForgeryToken()
+                        <button type="submit" class="btn btn-danger">Eliminar</button>
+                    </form>
+                    <a class="btn btn-success" href="@Url.Action("EditCentroCostos", "CentroCostos", new { id = centroCosto.Codigo })">Editar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <style>
+        body {
+            position: relative;
+            left: 20%;
+        }
+
+        .side-var {
+            width: 20%;
+            height: 100%;
+            background-color: rgb(22, 73, 107);
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            overflow-x: hidden;
+            padding-top: 20px;
+            color: white;
+        }
+
+            .side-var h3 {
+                text-align: center;
+            }
+
+            .side-var a {
+                position: relative;
+                left: 10%;
+                color: white;
+                text-decoration: none;
+            }
+    </style>
+
+<body>
+    <div class="side-var">
+        <h3>Menu</h3>
+        <a href="@Url.Action("CentroCostos", "CentroCostos")">Centro de costos</a><br />
+
+        <a href="@Url.Action("Index", "Home")">Salir</a><br />
+    </div>
+</body>
